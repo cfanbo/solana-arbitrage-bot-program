@@ -1,0 +1,17 @@
+[package]
+name = "hello_world"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+solana-program = "2.3.0"
+thiserror = "2.0.12"
+
+[features]
+custom-panic = []
+custom-heap = []
+
+# cargo build-sbf --features "custom-panic custom-heap"
