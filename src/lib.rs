@@ -16,9 +16,9 @@ use thiserror::Error;
 
 #[derive(Clone, Debug, Eq, PartialEq, Error)]
 pub enum ErrorCode {
-    /// Profit is below the minimum threshold, transaction reverted.
+    /// Profit is below the minimum threshold, transaction reverted. （0x64 = 100）
     #[error("Profit is below threshold, transaction reverted.")]
-    NotEnoughProfit,
+    NotEnoughProfit = 100,
 }
 
 impl From<ErrorCode> for ProgramError {
@@ -96,12 +96,12 @@ pub fn process_instruction(
     }
     // msg!("Report: profit={}", profit);
 
-    let fee = (profit as f64 * 0.1) as u64;
-    let ix = transfer(payer.key, to_recipient.key, fee);
-    invoke(
-        &ix,
-        &[payer.clone(), to_recipient.clone(), system_program.clone()],
-    )?;
+    // let fee = (profit as f64 * 0.1) as u64;
+    // let ix = transfer(payer.key, to_recipient.key, fee);
+    // invoke(
+    //     &ix,
+    //     &[payer.clone(), to_recipient.clone(), system_program.clone()],
+    // )?;
     // msg!("Report: profit={}", profit);
 
     Ok(())
